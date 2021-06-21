@@ -1,4 +1,6 @@
 
+//Time Complexity: O(n2), Space Complexity: O(1)
+
 let trappingRainWater = function(blocks){
 
     let waterStored=0;

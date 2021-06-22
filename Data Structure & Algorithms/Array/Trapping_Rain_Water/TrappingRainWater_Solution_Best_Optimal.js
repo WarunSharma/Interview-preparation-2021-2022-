@@ -11,6 +11,7 @@ let trappingRainWater = function(blocks){
         return waterStored;
     }
 
+    //Define left and right pointer
     let left=0,right=blocks.length-1;
     let leftMax=0,rightMax=0;
 

@@ -41,3 +41,9 @@ console.log(sortArrayOfZeroOnetwo([0 ,2 ,1 ,2 ,0]));
 
 console.log('Testcase2');
 console.log(sortArrayOfZeroOnetwo([0 ,1 , 0]));
+
+console.log('Testcase3');
+console.log(sortArrayOfZeroOnetwo([2,2]));
+
+console.log('Testcase4');
+console.log(sortArrayOfZeroOnetwo([1, 1]));

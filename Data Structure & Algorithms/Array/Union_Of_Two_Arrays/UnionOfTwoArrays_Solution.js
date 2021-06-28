@@ -21,7 +21,7 @@ let unionOfTwoArray=function(nums1,nums2){
         res.push(i);
     }
 
-    return res;
+    return res.length;
 }
 
 console.log('Testcase1');

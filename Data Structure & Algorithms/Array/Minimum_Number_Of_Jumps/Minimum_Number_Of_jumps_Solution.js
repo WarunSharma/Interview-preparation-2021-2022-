@@ -5,26 +5,30 @@
 */
 
 let minimumNumber=function(nums){
-    let n=nums.length;
-    let dp=new Array(n).fill(Number.MAX_SAFE_INTEGER);
+    let length=nums.length;
+
+    let dp=new Array(nums.length).fill(Number.MAX_SAFE_INTEGER);
     dp[0]=0;
 
-    for(let i=1;i<n;++i){
-        for(let j=0;j<i;++j){
-            if(dp[j]!=Number.MAX_SAFE_INTEGER && nums[j]+j>=i){
-                if(dp[i]>dp[j]+1){
-                    dp[i]=dp[j]+1;
+    if(nums[0]==0 && nums.length>1){
+        return -1;
+    }
+    else {
+        for(let i=1;i<length;++i){
+            for(let j=0;j<i;++j){
+                if(dp[j]!=Number.MAX_SAFE_INTEGER && nums[j]+j>=i){
+                    if(dp[j]+1<dp[i]){
+                        dp[i]=dp[j]+1;
+                    }
                 }
             }
         }
     }
-
-    if(dp[n-1]!=Number.MAX_SAFE_INTEGER){
-        return dp[n-1];
+    
+    if(dp[length-1]!=Number.MAX_SAFE_INTEGER){
+        return dp[length-1];
     }
-    else{
-        return -1;
-    }
+    return -1;
 
 }
 

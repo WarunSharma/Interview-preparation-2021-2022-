@@ -1,4 +1,10 @@
 
+/*
+* Delete An Element from a Single Linked List
+* Time Complexity: O(n)
+* Space Complexity: O(n)
+*/
+
 function Node(value){
     this.data=value;
     this.next=null;

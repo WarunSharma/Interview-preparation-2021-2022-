@@ -25,6 +25,7 @@ SingleLinkedList.prototype.insert=function(value){
         }
         cursor.next=new Node(value)
     }
+    ++this.size;
 }
 
 SingleLinkedList.prototype.display=function(){

@@ -9,12 +9,12 @@ function Node(value){
     this.next=null;
 }
 
-function SingleLinkedList(value){
+function SinglyLinkedList(value){
     this.head=null;
     this.size=0;
 }
 
-SingleLinkedList.prototype.insert=function(value){
+SinglyLinkedList.prototype.insert=function(value){
     if(this.head==null){
         this.head=new Node(value);
     }
@@ -26,7 +26,7 @@ SingleLinkedList.prototype.insert=function(value){
     ++this.size;
 }
 
-SingleLinkedList.prototype.display=function(){
+SinglyLinkedList.prototype.display=function(){
     let cursor=this.head;
     while(cursor!=null){
         console.log(cursor.data);
@@ -34,7 +34,7 @@ SingleLinkedList.prototype.display=function(){
     }
 }
 
-let SLL=new SingleLinkedList();
+let SLL=new SinglyLinkedList();
 SLL.insert(1);
 SLL.insert(2);
 SLL.insert(3);

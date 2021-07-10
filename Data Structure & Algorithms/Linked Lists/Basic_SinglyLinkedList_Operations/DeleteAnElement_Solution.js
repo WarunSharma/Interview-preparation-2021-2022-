@@ -1,6 +1,6 @@
 
 /*
-* Delete An Element from a Single Linked List
+* Delete An Element from a Singly Linked List
 * Time Complexity: O(n)
 * Space Complexity: O(n)
 */
@@ -10,12 +10,12 @@ function Node(value){
     this.next=null;
 }
 
-function SingleLinkedList(){
+function SinglyLinkedList(){
     this.head=null;
     this.size=0;
 }
 
-SingleLinkedList.prototype.insert=function(value){
+SinglyLinkedList.prototype.insert=function(value){
     let currNode=this.head;
     if(currNode==null){
         this.head=new Node(value);
@@ -27,7 +27,7 @@ SingleLinkedList.prototype.insert=function(value){
     ++this.size;
 }
 
-SingleLinkedList.prototype.delete=function(value){
+SinglyLinkedList.prototype.delete=function(value){
     let currNode=this.head;
     if(currNode.data==value){
         this.head=currNode.next;
@@ -51,7 +51,7 @@ SingleLinkedList.prototype.delete=function(value){
     }
 }
 
-SingleLinkedList.prototype.display=function(){
+SinglyLinkedList.prototype.display=function(){
     let currNode=this.head;
     while(currNode!=null){
         console.log(currNode.data);
@@ -59,7 +59,7 @@ SingleLinkedList.prototype.display=function(){
     }
 }
 
-let SLL=new SingleLinkedList();
+let SLL=new SinglyLinkedList();
 SLL.insert(1);
 SLL.insert(2);
 SLL.insert(3);

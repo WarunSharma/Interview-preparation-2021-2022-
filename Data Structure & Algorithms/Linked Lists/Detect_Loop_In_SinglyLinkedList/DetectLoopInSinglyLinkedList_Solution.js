@@ -51,15 +51,15 @@ SinglyLinkedList.prototype.createLoop=function(){
 
 SinglyLinkedList.prototype.detectLoop=function(){
     let slow=this.head;
-    let fast=this.head.next;
-    while(slow!=null && fast.next!=null && fast.next.next!=null){
+    let fast=this.head;
+    while(slow!==null && fast!==null && fast.next!==null){
+        slow=slow.next;
+        fast=fast.next.next; 
         if(slow==fast)
             return true;
-        slow=slow.next;
-        fast=fast.next.next;    
     }
 
-    return false;
+    return false; 
 }
 
 let SLL=new SinglyLinkedList();

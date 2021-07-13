@@ -1,7 +1,7 @@
 
 
 /* Insert an Element at End of Linked List
-* Time Complexity: O(n2)
+* Time Complexity: O(n)
 * Space Complexity: O(1)
 */
 

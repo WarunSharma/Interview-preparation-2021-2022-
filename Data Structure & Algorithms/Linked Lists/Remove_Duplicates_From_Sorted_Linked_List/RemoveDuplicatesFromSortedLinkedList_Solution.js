@@ -37,7 +37,7 @@ SinglyLinkedList.prototype.display=function(){
     }
 }
 
-SinglyLinkedList.prototype.sort=function(){
+SinglyLinkedList.prototype.removeDuplicates=function(){
     let cursor=this.head;
     while(cursor.next!==null){
         if(cursor.data==cursor.next.data){
@@ -56,5 +56,5 @@ SLL.insert(2);
 SLL.insert(2);
 SLL.insert(2);
 SLL.display();
-SLL.sort();
+SLL.removeDuplicates();
 SLL.display();

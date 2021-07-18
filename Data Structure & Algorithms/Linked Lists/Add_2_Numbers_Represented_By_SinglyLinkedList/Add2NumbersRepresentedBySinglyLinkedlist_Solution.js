@@ -1,7 +1,7 @@
 
 /* Insert an Element at Begining of Linked List
 * Time Complexity: O(n)
-* Space Complexity: O(1)
+* Space Complexity: O(n) {Resultant Linked List}
 */
 
 function Node(value){
@@ -14,6 +14,7 @@ function SinglyLinkedList(value){
     this.size=0;
 }
 
+//Insert a node at End
 SinglyLinkedList.prototype.insert=function(value){
     if(this.head==null){
         this.head=new Node(value);
@@ -36,6 +37,7 @@ let display=function(head){
     }
 }
 
+//Recursive solution to reverse a Linked List
 let reverse=function(head){
     if(head==null || head.next==null){
         return head;
@@ -65,7 +67,7 @@ let addLinkedLists=function(head1,head2){
     let length2=calculateLength(head2);
     let remainder=0;
     let sum=0;
-    let SLL3=new SinglyLinkedList();
+    let SLL3=new SinglyLinkedList();    //Resultant LinkedList
     while(curNode1!=null || curNode2!=null){
         if(length1==0 || length2==0){
             return;
@@ -90,6 +92,8 @@ let addLinkedLists=function(head1,head2){
             remainder=Math.floor(sum/10);
         }
     }
+
+    //Check remainder > 0 after traversal of both LinkedList
     if(remainder>0){
         SLL3.insert(remainder%10)
     }
@@ -103,13 +107,13 @@ SLL1.insert(9);
 SLL1.insert(9);
 SLL1.insert(9);
 SLL1.insert(9);
-//display(SLL1.head);
+//Reverse First LinkedList for iterating and carrying remainder
 SLL1.head=reverse(SLL1.head);
 SLL2.insert(9);
 SLL2.insert(9);
 SLL2.insert(9);
 SLL2.insert(9);
-//display(SLL2.head);
+//Reverse Second LinkedList for iterating and carrying remainder
 SLL2.head=reverse(SLL2.head);
 let resultantHead=addLinkedLists(SLL1.head,SLL2.head);
 resultantHead=reverse(resultantHead);

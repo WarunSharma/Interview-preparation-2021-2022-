@@ -1,5 +1,5 @@
 
-/* Insert an Element at Begining of Linked List
+/* Add 2 numbers represented by LinkedLists
 * Time Complexity: O(n)
 * Space Complexity: O(n) {Resultant Linked List}
 */

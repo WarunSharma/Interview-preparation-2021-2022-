@@ -1,6 +1,6 @@
 
 
-/* Reverse a Singly Linked List
+/* Reverse a Singly Linked List in Group Of K
 * Time Complexity: O(n)
 * Space Complexity: O(1)
 */
@@ -62,5 +62,5 @@ SLL.insert(3);
 SLL.insert(4);
 SLL.insert(5);
 SLL.display();
-SLL.head=SLL.reverse(SLL.head,1);
+SLL.head=SLL.reverse(SLL.head,2);
 SLL.display()

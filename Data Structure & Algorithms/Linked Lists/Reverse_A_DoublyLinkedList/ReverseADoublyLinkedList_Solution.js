@@ -1,6 +1,6 @@
 
 /*
-* Insert An Element At Beginning of Doubly Linked List
+* Reverse a Doubly Linked List
 * Time Complexity: O(n)
 * Space Complexity: O(1)
 */

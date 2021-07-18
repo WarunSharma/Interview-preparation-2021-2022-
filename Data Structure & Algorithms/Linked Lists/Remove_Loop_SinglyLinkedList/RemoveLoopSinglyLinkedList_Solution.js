@@ -1,9 +1,9 @@
 
 
 
-/* Insert an Element at End of Linked List
+/* Remove a Loop from a Singly LinkedList
 * Time Complexity: O(n)
-* Space Complexity: O(n)
+* Space Complexity: O(1)
 */
 
 function Node(value){

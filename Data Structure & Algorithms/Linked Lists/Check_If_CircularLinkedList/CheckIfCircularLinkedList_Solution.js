@@ -1,4 +1,9 @@
 
+/* Check if LinkedList is a Circular LinkedList
+* Time Complexity: O(n)
+* Space Complexity: O(1)
+*/
+
 function Node(value){
     this.data=value;
     this.next=null;
@@ -38,6 +43,7 @@ CircularLinkedList.prototype.isCircular=function(){
         return true;
     }
     let node=this.head.next;
+    //Traverse the LinkedList till node reaches null(if singly LinkedList) or head(Circular LinkedList)
     while(node!==null && node!==this.head){
         node=node.next;
     }

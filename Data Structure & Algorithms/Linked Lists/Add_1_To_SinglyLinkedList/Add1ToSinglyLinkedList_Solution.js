@@ -1,8 +1,8 @@
 
 
-/* Insert an Element at End of Linked List
+/* Add 1 or any num(single digit) to a Singly Linked List
 * Time Complexity: O(n)
-* Space Complexity: O(n)
+* Space Complexity: O(1)
 */
 
 function Node(value){
@@ -15,6 +15,7 @@ function SinglyLinkedList(value){
     this.size=0;
 }
 
+//Insert a node at End of Linked List
 SinglyLinkedList.prototype.insert=function(value){
     if(this.head==null){
         this.head=new Node(value);
@@ -37,6 +38,7 @@ SinglyLinkedList.prototype.display=function(){
     }
 }
 
+//Iterative solution for reversing a SinglyLinkedList
 SinglyLinkedList.prototype.reverse=function(){
     let curNode=this.head;
     let next=null,prev=null;
@@ -50,6 +52,10 @@ SinglyLinkedList.prototype.reverse=function(){
 }
 
 SinglyLinkedList.prototype.addNum=function(num){
+    /*Reverse the Linked List for Addition
+    * traverse the linked list in forward direction
+    * Add the carry to next nodes
+    */
     this.reverse();
     let remainder=num;
     let curNode=this.head;
@@ -63,6 +69,8 @@ SinglyLinkedList.prototype.addNum=function(num){
         curNode=curNode.next;
     }
     prevNode.next=remainder>0?new Node(remainder):null;
+    /*Reverse to get originally modified Linked List
+    */
     this.reverse();
 }
 

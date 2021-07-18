@@ -1,4 +1,10 @@
 
+/*
+* Search An Element from a Singly Linked List
+* Time Complexity: O(n)
+* Space Complexity: O(1)
+*/
+
 function Node(value){
     this.data=value;
     this.next=null;

@@ -2,7 +2,7 @@
 /*
 * Delete An Element from a Singly Linked List
 * Time Complexity: O(n)
-* Space Complexity: O(n)
+* Space Complexity: O(1)
 */
 
 function Node(value){
@@ -29,25 +29,27 @@ SinglyLinkedList.prototype.insert=function(value){
 
 SinglyLinkedList.prototype.delete=function(value){
     let currNode=this.head;
-    if(currNode.data==value){
-        this.head=currNode.next;
-        this.size--;
-    }
-    else{
-        let prevNode=currNode;
-        while(currNode.next!=null){
-            if(currNode.data==value){
-                prevNode.next=currNode.next;
-            }
-
-            prevNode=currNode;
-            currNode=currNode.next;
-        }
-
+    if(currNode!=null){
         if(currNode.data==value){
-            prevNode.next=null;
+            this.head=currNode.next;
+            this.size--;
         }
-        --this.size;
+        else{
+            let prevNode=currNode;
+            while(currNode.next!=null){
+                if(currNode.data==value){
+                    prevNode.next=currNode.next;
+                }
+    
+                prevNode=currNode;
+                currNode=currNode.next;
+            }
+    
+            if(currNode.data==value){
+                prevNode.next=null;
+            }
+            --this.size;
+        }
     }
 }
 

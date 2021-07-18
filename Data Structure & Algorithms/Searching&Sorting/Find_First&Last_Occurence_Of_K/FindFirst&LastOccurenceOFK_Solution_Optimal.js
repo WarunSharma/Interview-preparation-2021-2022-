@@ -29,7 +29,7 @@ function findLastOccurence(nums,low,high,k){
         if(nums[mid]==k && (nums[mid+1]!=k || mid+1==nums.length)){
             return mid;
         }
-        else if(nums[mid]>=k){
+        else if(nums[mid]>k){
             return findLastOccurence(nums,low,mid-1,k);
         }
         else{

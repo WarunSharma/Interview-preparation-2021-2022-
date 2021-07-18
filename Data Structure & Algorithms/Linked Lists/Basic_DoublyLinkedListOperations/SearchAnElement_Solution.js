@@ -2,7 +2,7 @@
 /*
 * Search An Element in Doubly Linked List
 * Time Complexity: O(n)
-* Space Complexity: O(n)
+* Space Complexity: O(1)
 */
 
 function Node(value){
@@ -22,6 +22,7 @@ DoublyLinkedList.prototype.insert=function(value){
         this.head=new Node(value);
         this.tail=this.head;
     }
+    //Insert an Element At End using tail pointer
     else{
         let temp=this.tail;
         this.tail=new Node(value);
@@ -41,6 +42,7 @@ DoublyLinkedList.prototype.display=function(){
 
 DoublyLinkedList.prototype.search=function(value){
     let cursor=this.head;
+    //Iterate the Linked List for searching an element
     while(cursor!=null){
         if(cursor.data==value){
             return true;

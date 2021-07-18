@@ -1,8 +1,8 @@
 
 /*
 * Delete An Element of Doubly Linked List
-* Time Complexity: O(1)
-* Space Complexity: O(n)
+* Time Complexity: O(n)
+* Space Complexity: O(1)
 */
 
 function Node(value){
@@ -41,26 +41,35 @@ DoublyLinkedList.prototype.display=function(){
 
 DoublyLinkedList.prototype.delete=function(value){
     let cursor=this.head;
-    if(cursor.data==value){
-        this.head=this.head.next;
-        if(cursor.next!=null){
-            this.head.prev=null;
+    if(cursor!==null){
+        //First Node matches the value
+        if(cursor.data==value){
+            this.head=this.head.next;
+            //Check LinkedList has more than one node
+            if(cursor.next!=null){
+                this.head.prev=null;
+            }
+            else{
+                this.tail=null;
+            }
+            --this.size;
         }
-        --this.size;
-    }
-    else{
-        while(cursor.next!=null){
+        else{
+            while(cursor.next!=null){
+                if(cursor.data==value){
+                    cursor.prev.next=cursor.next;
+                    cursor.next.prev=cursor.prev;
+                    --this.size;
+                }
+                cursor=cursor.next;
+            }
+    
             if(cursor.data==value){
-                cursor.prev.next=cursor.next;
-                cursor.next.prev=cursor.prev;
+                this.tail=cursor.prev;
+                cursor.prev.next=null;
+
                 --this.size;
             }
-            cursor=cursor.next;
-        }
-
-        if(cursor.data==value){
-            cursor.prev.next=null;
-            --this.size;
         }
     }
 }
@@ -72,5 +81,5 @@ DLL.insert(3);
 DLL.insert(4);
 DLL.insert(5);
 DLL.display();
-DLL.delete(1)
+DLL.delete(5)
 DLL.display()

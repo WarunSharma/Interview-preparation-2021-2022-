@@ -1,8 +1,8 @@
 
 /*
-* Insert An Element At Beginning of Doubly Linked List
+* Insert An Element At End of Doubly Linked List
 * Time Complexity: O(1)
-* Space Complexity: O(n)
+* Space Complexity: O(1)
 */
 
 function Node(value){

@@ -5,6 +5,9 @@
 * Step2: Find Last occurence of k,
 * Step3: Return Last Occurence - First Occurence
 *
+* Time Complexity: O(logn)
+* Space Complexity: O(1)
+*
 */
 
 

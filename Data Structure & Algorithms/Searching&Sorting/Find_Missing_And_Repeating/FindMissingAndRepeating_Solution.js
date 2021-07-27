@@ -1,6 +1,9 @@
 
 /*
 *
+* Time Complexity: O(n)
+* Space Complexity: O(1)
+*
 * @param nums Given array
 * @returns res Resultant array containing repeating and missing element
 *

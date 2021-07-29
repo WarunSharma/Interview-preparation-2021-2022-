@@ -26,28 +26,38 @@ Third Pass:
 ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 ) 
 */
 
-function bubbleSort(nums){
-    let temp,swap;
-    for(let i=0;i<nums.length-1;++i){
-        swap=false;
-        console.log(i);
-        for(let j=i;j<nums.length-i;++j){
-            if(nums[j]>nums[j+1]){
-                swap=true;
-                temp=nums[j];
-                nums[j]=nums[j+1];
-                nums[j+1]=temp;
+/*
+*
+* @param nums Given array
+* @returns nums Sorted array
+*
+*/
+function bubbleSort(nums) {
+    let temp, swap;
+    //ith iteration
+    for (let i = 0; i < nums.length - 1; ++i) {
+        swap = false;
+        for (let j = i; j < nums.length - i; ++j) {
+            //Check adjacent elements 
+            if (nums[j] > nums[j + 1]) {
+                //Swap elements
+                swap = true;
+                temp = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = temp;
             }
         }
-        if(!swap){
+        //swap denotes elements in that iteration required swapping or not
+        if (!swap) {
             break;
         }
     }
     return nums;
 }
 
+//Testcases
 console.log('Testcase1');
-console.log(bubbleSort([1,4,2,8,9,3,6]));
+console.log(bubbleSort([1, 4, 2, 8, 9, 3, 6]));
 
 console.log('Testcase2');
 console.log(bubbleSort([1, 2, 3, 4, 6, 8, 9]));

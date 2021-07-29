@@ -1,43 +1,59 @@
 
-function searchInRotatedSortedArray(nums,target){
-    let low=0,high=arr.length-1,mid;
+/*
+*
+* @param nums Given array
+* @param target Target element
+* @returns index
+*
+*/
 
-    while(high-low>1){
-        mid=Math.floor((low+high)/2);
-        if(arr[low]<arr[mid]){
-            if(target>=arr[low] && target<=arr[mid]){
-                high=mid;
+function searchInRotatedSortedArray(nums, target) {
+    let low = 0, high = arr.length - 1, mid;
+
+    while (high - low > 1) {
+        mid = Math.floor((low + high) / 2);
+        //If first half is sorted
+        if (arr[low] < arr[mid]) {
+            //target is present in first half
+            if (target >= arr[low] && target <= arr[mid]) {
+                high = mid;
             }
-            else{
-                low=mid;
+            //target is present in second half
+            else {
+                low = mid;
             }
         }
-        else{
-            if(target>=arr[mid] && target<=arr[high]){
-                low=mid;
+        //Second half is sorted
+        else {
+            //target is present in second half
+            if (target >= arr[mid] && target <= arr[high]) {
+                low = mid;
             }
-            else{
-                high=mid;
+            //target is present in first half
+            else {
+                high = mid;
             }
         }
-    }    
+    }
 
-    if(arr[low]==target)
+    //Either low or high is the result, else -1
+    if (arr[low] == target)
         return low;
-    if(arr[high]==target)
+    if (arr[high] == target)
         return high;
-            
-    return -1;    
+
+    return -1;
 }
 
+//Testcases
 console.log('Testcase1');
-console.log(searchInRotatedSortedArray([4,5,6,7,0,1,2],0));
+console.log(searchInRotatedSortedArray([4, 5, 6, 7, 0, 1, 2], 0));
 
 console.log('Testcase2');
-console.log(searchInRotatedSortedArray([4,5,6,7,0,1,2],4));
+console.log(searchInRotatedSortedArray([4, 5, 6, 7, 0, 1, 2], 4));
 
 console.log('Testcase1');
-console.log(searchInRotatedSortedArray([4,5,6,7,0,1,2],1));
+console.log(searchInRotatedSortedArray([4, 5, 6, 7, 0, 1, 2], 1));
 
 console.log('Testcase1');
-console.log(searchInRotatedSortedArray([4,5,6,7,0,1,2],6));
+console.log(searchInRotatedSortedArray([4, 5, 6, 7, 0, 1, 2], 6));

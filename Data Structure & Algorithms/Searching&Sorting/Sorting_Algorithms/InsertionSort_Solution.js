@@ -37,20 +37,20 @@ i = 4. 6 will move to position after 5, and elements from 11 to 13 will move one
 * @returns nums Sorted array
 *
 */
-function insertionSort(nums){
-    for(let i=1;i<nums.length;++i){
-        let temp=nums[i];
-        let j=i-1;
+function insertionSort(nums) {
+    for (let i = 1; i < nums.length; ++i) {
+        let temp = nums[i];
+        let j = i - 1;
 
         /* Move elements of nums[0..i-1], that are
         greater than temp, to one position ahead
         of their current position */
 
-        while(j>=0 && nums[j]>temp){
-            nums[j+1]=nums[j];
+        while (j >= 0 && nums[j] > temp) {
+            nums[j + 1] = nums[j];
             --j;
         }
-        nums[j+1]=temp;
+        nums[j + 1] = temp;
     }
 
     return nums;
@@ -58,7 +58,7 @@ function insertionSort(nums){
 
 //Testcases
 console.log('Testcase1');
-console.log(insertionSort([1,4,2,8,9,3,6]));
+console.log(insertionSort([1, 4, 2, 8, 9, 3, 6]));
 
 console.log('Testcase2');
 console.log(insertionSort([1, 2, 3, 4, 6, 8, 9]));

@@ -1,5 +1,12 @@
 
 //Time Complexity: O(n3) , Space Complexity: O(1)
+/*
+*
+* @param nums Given array
+* @param target Target Sum
+* @param result resultant array
+*
+*/
 let fourSum = function(nums,target){
 
     //If given array length is less
@@ -13,11 +20,14 @@ let fourSum = function(nums,target){
     //Sort nums array in ascending order to apply Two-pointer approach
     let sortedNums = nums.sort((a,b)=>a-b);
 
+    //ith element iteration
     for(let i=0;i<sortedNums.length-3;++i){
         //Skipping duplicate elements 
         if(i>0 && sortedNums[i]==sortedNums[i-1]){
             continue;
         }
+
+        //jth element interation
         for(let j=i+1;j<sortedNums.length-2;++j){
             //Skipping duplicate elements
             if(j>i+1 && sortedNums[j]==sortedNums[j-1]){
@@ -25,6 +35,8 @@ let fourSum = function(nums,target){
             }
             let left=j+1,right=sortedNums.length-1;
             let sum=0;
+
+            //left and right index
             while(left<right){
                 sum=sortedNums[i]+sortedNums[j]+sortedNums[left]+sortedNums[right];
                 if(sum>target){
@@ -55,6 +67,7 @@ let fourSum = function(nums,target){
     return result;
 }
 
+//Testcases
 console.log('Testcase1')
 console.log(fourSum([1,0,-1,0,-2,2],0));
 

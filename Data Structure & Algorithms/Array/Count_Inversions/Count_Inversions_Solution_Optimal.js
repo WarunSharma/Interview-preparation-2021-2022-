@@ -66,6 +66,7 @@ function countInversions(nums) {
     return inversions;
 }
 
+//Testcases
 console.log('Testcase1');
 console.log(countInversions([8, 4, 2, 1]));
 

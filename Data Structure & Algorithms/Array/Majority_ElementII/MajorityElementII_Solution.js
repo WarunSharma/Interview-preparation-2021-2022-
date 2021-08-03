@@ -40,8 +40,8 @@ let majorityElementII = function (nums) {
 console.log('Testcase1');
 console.log(majorityElementII([3, 2, 3]));
 
-console.log('Testcase1');
+console.log('Testcase2');
 console.log(majorityElementII([1]));
 
-console.log('Testcase1');
+console.log('Testcase3');
 console.log(majorityElementII([1, 2]));

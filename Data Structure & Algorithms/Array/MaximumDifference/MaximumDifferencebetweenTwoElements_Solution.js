@@ -10,24 +10,24 @@
 */
 
 
-let maximumDifference = function(nums){
+let maximumDifference = function (nums) {
 
     //Initialize
-    let currDiff=0,maxDiff=Number.MIN_SAFE_INTEGER;
-    let min=Number.MAX_SAFE_INTEGER;
+    let currDiff = 0, maxDiff = Number.MIN_SAFE_INTEGER;
+    let min = Number.MAX_SAFE_INTEGER;
 
-    for(let i=0;i<nums.length;++i){
-        
+    for (let i = 0; i < nums.length; ++i) {
+
         //Replace min with new minimum value in the nums
-        if(min>nums[i]){
-            min=nums[i];
+        if (min > nums[i]) {
+            min = nums[i];
         }
 
         //Recalculate CurrDiff 
-        currDiff=nums[i]-min;
+        currDiff = nums[i] - min;
 
         //Replace maxDiff with new current Difference and previous maximum Difference
-        maxDiff=Math.max(currDiff,maxDiff);
+        maxDiff = Math.max(currDiff, maxDiff);
     }
 
     return maxDiff;

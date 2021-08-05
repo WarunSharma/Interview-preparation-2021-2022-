@@ -1,43 +1,48 @@
 
 
 /*
+*
 * Time Complexity: O(n)
 * Space Complexity: O(1)
+*
+* @param nums Given array
+* @returns Minimum Jumps
+*
 */
 
-let minimumNumber=function(nums){
-    let maxReach=0,jumps=0,curReach=0;
+let minimumNumber = function (nums) {
 
-    if(nums.length==1){
-        return 0;
-    }
-    else if(nums[0]==0){
+    if (nums[0] == 0) {
         return -1;
     }
-    else{
-        for(let i=0;i<nums.length-1;++i){
-            if(nums[i]+1>maxReach){
-                maxReach=nums[i]+i;
-            }
+    if (nums.length == 1) {
+        return 0;
+    }
 
-            if(i==curReach){
-                ++jumps;
-                curReach=maxReach
+    let reach = nums[0], stepsLeft = nums[0], jumps = 1;
+
+    for (let i = 1; i < nums.length - 1; ++i) {
+        //Calculate maximum reachable distance for the (i)th index
+        reach = Math.max(reach, nums[i] + i);
+
+        //Update steps;
+        stepsLeft--;
+        if (stepsLeft == 0) {
+            ++jumps;
+            if (i >= reach) {
+                return -1;
             }
+            stepsLeft = reach - i;
         }
     }
 
-    if(curReach>=nums.length-1){
-        return jumps;
-    }
-    else{
-        return -1;
-    }
+    return jumps;
 
 }
 
+//Testcases
 console.log('Testcase1');
-console.log(minimumNumber([1,2,3,4,5,6]));
+console.log(minimumNumber([1, 2, 3, 4, 5, 6]));
 
 console.log('Testcase2');
 console.log(minimumNumber([1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9]));

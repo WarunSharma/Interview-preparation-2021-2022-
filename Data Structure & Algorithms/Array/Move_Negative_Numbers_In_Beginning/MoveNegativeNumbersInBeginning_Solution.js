@@ -1,4 +1,14 @@
 
+/*
+*
+* Time Complexity: O(n)
+* Space Complexity: O(1)
+*
+* @param nums Given array
+* @returns nums Resultant array
+*
+*/
+
 let moveNegativeNumbersBeginning=function(nums){
     
     let low=0;

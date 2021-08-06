@@ -1,7 +1,12 @@
 
 /*
+*
 * Time Complexity: O(n)
 * Space Complexity: O(1)
+*
+* @param nums Given array
+* @param nums Resultant array
+*
 */
 
 let moveZeroesAtEnd = function(nums){
@@ -20,6 +25,7 @@ let moveZeroesAtEnd = function(nums){
     return nums;
 }
 
+//Testcases
 console.log('Testcase1');
 console.log(moveZeroesAtEnd([1, 2, 0, 4, 3, 0, 5, 0]));
 

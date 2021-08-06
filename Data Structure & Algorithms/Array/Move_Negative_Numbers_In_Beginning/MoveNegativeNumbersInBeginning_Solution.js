@@ -27,5 +27,6 @@ let moveNegativeNumbersBeginning=function(nums){
 
 }
 
+//Testcases
 console.log('Testcase1');
 console.log(moveNegativeNumbersBeginning([-12, 11, -13, -5, 6, -7, 5, -3, -6]))

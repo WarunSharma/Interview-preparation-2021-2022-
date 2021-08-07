@@ -1,5 +1,13 @@
 
-//Time Complexity: O(n), Space Complexity: O(2n)
+/*
+*
+* Time Complexity: O(n)
+* Space Complexity: O(n)
+*
+* @param blocks Given array of block size
+* @returns waterStored Maximum resultant water stored
+* 
+*/
 
 let trappingRainWater = function(blocks){
 
@@ -15,11 +23,12 @@ let trappingRainWater = function(blocks){
 
     leftMax[0]=blocks[0], rightMax[blocks.length-1]=blocks[blocks.length-1];
     
-    //Storing max elements on respective indexes
+    //Storing max elements on respective indexes in LeftMax
     for(let i=1;i<blocks.length;++i){
         leftMax[i]=Math.max(leftMax[i-1],blocks[i]);
     }
 
+    //Storing max elements on respective indexes in RightMax
     for(let i=blocks.length-2;i>=0;--i){
         rightMax[i]=Math.max(rightMax[i+1],blocks[i]);
     }
@@ -37,6 +46,7 @@ let trappingRainWater = function(blocks){
     return waterStored;
 }
 
+//Testcases
 console.log('Testcase1');
 console.log(trappingRainWater([4,2,0,3,2,5]));
 

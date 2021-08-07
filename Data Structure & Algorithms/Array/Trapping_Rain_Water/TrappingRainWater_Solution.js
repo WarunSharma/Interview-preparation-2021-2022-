@@ -1,5 +1,13 @@
 
-//Time Complexity: O(n2), Space Complexity: O(1)
+/*
+*
+* Time Complexity: O(n2)
+* Space Complexity: O(1)
+*
+* @param blocks Given array of block size
+* @returns waterStored Maximum resultant water stored
+* 
+*/
 
 let trappingRainWater = function(blocks){
 
@@ -34,6 +42,7 @@ let trappingRainWater = function(blocks){
     return waterStored;
 }
 
+//Testcases
 console.log('Testcase1');
 console.log(trappingRainWater([4,2,0,3,2,5]));
 

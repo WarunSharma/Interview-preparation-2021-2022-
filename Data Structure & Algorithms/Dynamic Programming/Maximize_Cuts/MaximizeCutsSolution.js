@@ -4,7 +4,7 @@ function maximizeCuts(N,X,Y,Z){
         return 0;
     }
 
-    return 1 + Math.min(maximizeCuts(N-X,X,Y,Z),
+    return 1 + Math.max(maximizeCuts(N-X,X,Y,Z),
     maximizeCuts(N-Y,X,Y,Z),
     maximizeCuts(N-Z,X,Y,Z));
 }

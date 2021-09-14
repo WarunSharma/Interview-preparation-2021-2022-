@@ -1,7 +1,7 @@
 
 Who Am I ?
 Hi all,
-    I am Warun Sharma currently working as a Software Engineer in PureSoftware Ltd. I have a passion to solve problems and competetive platforms are best place to learn. Love to learn and share.
+    I am Warun Sharma currently working as a Software Engineer in PureSoftware Ltd. I love Love to learn and share knowlegde.
 
 
 How to contact me ?

@@ -17,3 +17,5 @@ function isNumberPrime(nums){
 
     }
 }
+
+isNumberPrime([13,2,3,4,5]);

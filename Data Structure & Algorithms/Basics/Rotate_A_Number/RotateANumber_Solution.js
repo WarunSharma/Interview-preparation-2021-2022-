@@ -9,12 +9,31 @@ function rotateNumber(num,rot){
         tempNum=parseInt(tempNum/10);
         ++digit;
     }
+    rot%=digit;
     if(rot<0){
         rot+=digit;
     }
-    rot%=digit;
-    result=(R*Math.pow(10,digit-rot))+Q;
-    console.log(result);
+    tempNum=num;
+    let div=1;
+    let mult=1;
+        
+    for (let i = 1; i <= digit; i++)
+    {
+        if (i <= rot) //while the iterator is less than k
+        { //we increase the value of divisor
+            div *= 10;
+        }
+        else         //or else we increase the value of multiplier
+        {
+            mult *= 10;
+        }
+    }
+
+    let quo = parseInt(tempNum / div);    // extracting the quotient
+    let rem = tempNum % div;    // extracting the remainder
+    
+    let r = rem * mult + quo; //forming the rotated number
+    console.log(r);
 }
 
-rotateNumber(562984,2);
+rotateNumber(12340056,3);

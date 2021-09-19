@@ -6,7 +6,7 @@ function printPattern(num) {
             process.stdout.write((n) + "\t");
             n++;
         }
-        console.log();
+        console.log(); 
     }
 }
 

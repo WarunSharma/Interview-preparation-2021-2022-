@@ -99,7 +99,6 @@ function fillShell(nums,s,oneD){
 }
 
 function rotateShell(nums,s,r){
-    console.log("nums",nums);
     let oneD=findShell(nums,s);
     console.log("oneD",oneD)
     rotate(oneD,r);

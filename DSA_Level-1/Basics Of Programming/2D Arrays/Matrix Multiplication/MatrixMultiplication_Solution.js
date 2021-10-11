@@ -1,6 +1,6 @@
 
 function matrixMultiplication(nums1,nums2){
-    let res=new Array(nums1[0].length);
+    let res=new Array(nums1.length);
 
     for(let i=0;i<nums1[0].length;++i){
         res[i]=new Array(nums2[0].length).fill(0);

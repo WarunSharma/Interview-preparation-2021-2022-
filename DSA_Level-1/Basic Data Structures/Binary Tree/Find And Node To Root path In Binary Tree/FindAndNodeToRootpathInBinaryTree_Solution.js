@@ -243,10 +243,31 @@ function find(node,data){
 }
 
 function nodeToRootPath(node,data){
-
-    while(node){
-        nodeToRootPath()
+    let result=[];
+    if(find(node,data)){
+        let baseResult=[];
+        baseResult.push(node.data);
+        return baseResult;
     }
+        
+    let leftRoute=[];    
+    if(node.left)
+        leftRoute=nodeToRootPath(node.left,data);
+    let rightRoute=[];
+    if(node.right)
+        rightRoute=nodeToRootPath(node.right,data);
+
+    if(leftRoute.length>0){
+        leftRoute.push(node.data);
+        return leftRoute;
+    }
+
+    if(rightRoute.length>0){
+        rightRoute.push(node.data);
+        return rightRoute;
+    }
+
+    return [];
 }
 
 let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null, null]);
@@ -266,4 +287,5 @@ let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, 
 
 // levelorder(root);
 
-iterativePrePostInTraversal(root);
+// iterativePrePostInTraversal(root);
+console.log(nodeToRootPath(root,62));

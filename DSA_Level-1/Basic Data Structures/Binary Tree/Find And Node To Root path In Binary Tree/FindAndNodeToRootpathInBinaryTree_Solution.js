@@ -240,13 +240,12 @@ function find(node,data){
     if(node.data==data){
         return true;
     }
-    
 }
 
 function nodeToRootPath(node,data){
 
     while(node){
-        nodeToRootPath();
+        nodeToRootPath()
     }
 }
 

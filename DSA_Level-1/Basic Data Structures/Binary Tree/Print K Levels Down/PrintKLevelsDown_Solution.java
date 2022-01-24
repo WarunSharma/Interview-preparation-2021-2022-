@@ -79,57 +79,48 @@ public class Main {
     display(node.right);
   }
 
-  public static boolean find(Node node, int data){
-    if(node==null)
-        return false;
-    
-    if(node.data==data){
-        return true;
-    }    
-    
-    boolean lFind=find(node.left,data);
-    if(lFind==true){
-        return lFind;
-    }
-    
-    boolean rFind=find(node.right,data);
-    if(rFind==true){
-        return rFind;
-    }
-        
-    return false;    
-  }
+  public static void printKLevelsDown(Node node, int k){
 
-  public static ArrayList<Integer> nodeToRootPath(Node node, int data){
+    // Solution 1  
+    // int level=0;  
+    // ArrayDeque<Pair> queue=new ArrayDeque<>();
+    // Pair rootPair=new Pair(node,level);
     
-    ArrayList<Integer> leftRes=new ArrayList<>();
-    ArrayList<Integer> rightRes=new ArrayList<>();
+    // queue.addLast(rootPair);
     
-    if(node==null){
-        return new ArrayList<Integer>();
+    // while(queue.size()>0){
+    //     int queueSize=queue.size();
+    //     while(queueSize-->0){
+    //         Pair topPair=queue.removeFirst();
+            
+    //         if(topPair.state==k){
+    //             System.out.println(topPair.node.data);
+    //         }
+    //         else{
+    //             if(topPair.node.left!=null){
+    //                 Pair leftPair=new Pair(topPair.node.left,level+1);
+    //                 queue.addLast(leftPair);
+    //             }
+    //             if(topPair.node.right!=null){
+    //                 Pair rightPair=new Pair(topPair.node.right,level+1);
+    //                 queue.addLast(rightPair);
+    //             }
+    //         }
+    //     }
+    //     level++;
+    // }
+
+    //Solution 2
+    if(node==null || k<0){
+        return;
     }
-    
-    //System.out.println(node.data);
-    
-    if(node.data==data){
-        ArrayList<Integer> res=new ArrayList<>();
-        res.add(node.data);
-        return res;
+
+    if(k==0){
+        System.out.println(node.data)
     }
-    
-        leftRes=nodeToRootPath(node.left,data);
-        if(leftRes.size()>0){
-            leftRes.add(node.data);
-            return leftRes;
-        }
-    
-        rightRes=nodeToRootPath(node.right,data);
-        if(rightRes.size()>0){
-            rightRes.add(node.data);
-            return rightRes;
-        }
-      
-    return new ArrayList<Integer>();
+
+    printKLevelsDown(node.left,k-1);
+    printKLevelsDown(node.right,k-1);
   }
 
   public static void main(String[] args) throws Exception {
@@ -145,14 +136,10 @@ public class Main {
       }
     }
 
-    int data = Integer.parseInt(br.readLine());
+    int k = Integer.parseInt(br.readLine());
 
     Node root = construct(arr);
-    boolean found = find(root, data);
-    System.out.println(found);
-
-    ArrayList<Integer> path = nodeToRootPath(root, data);
-    System.out.println(path);
+    printKLevelsDown(root, k);
   }
 
 }

@@ -261,7 +261,7 @@ function nodeToRootPath(node,data){
     let result=[];
     if(node.data==data){
         let baseResult=[];
-        baseResult.push(node.data);
+        baseResult.push(node);
         return baseResult;
     }
         
@@ -273,16 +273,74 @@ function nodeToRootPath(node,data){
         rightRoute=nodeToRootPath(node.right,data);
 
     if(leftRoute.length>0){
-        leftRoute.push(node.data);
+        leftRoute.push(node);
         return leftRoute;
     }
 
     if(rightRoute.length>0){
-        rightRoute.push(node.data);
+        rightRoute.push(node);
         return rightRoute;
     }
 
     return [];
+}
+
+class PairLevel{
+    constructor(node,level){
+        this.node=node;
+        this.level=level;
+    }
+}
+
+function printKLevelsDown(node,k,blocker){
+
+    //Solution 1
+    // let level=0;
+    // let rootPair=new PairLevel(node,level);
+    // let queue=new Queue;
+    // queue.addLast(rootPair);
+
+    // while(queue.size()>0){
+    //     let queueSize=queue.size();
+    //     while(queueSize-->0){
+    //         let topPair=queue.removeFirst();
+
+    //         if(topPair.level==k){
+    //             console.log(topPair.node.data);
+    //         }
+
+    //         if(topPair.node.left){
+    //             let leftPair=new PairLevel(topPair.node.left,level+1);
+    //             queue.addLast(leftPair);
+    //         }
+
+    //         if(topPair.node.right){
+    //             let rightPair=new PairLevel(topPair.node.right,level+1);
+    //             queue.addLast(rightPair);
+    //         }
+    //     }
+    //     level++;
+    // }
+
+    //Solution 2
+    if(node==null || k<0 || node==blocker){
+        return;
+    }
+
+    if(k==0){
+        console.log(node.data)
+    }
+
+    printKLevelsDown(node.left,k-1,blocker);
+    printKLevelsDown(node.right,k-1,blocker);
+}
+
+function printKNodesFar(node,data,k){
+    let paths=nodeToRootPath(node,data);
+    console.log(paths);
+    for(let i=0;i<paths.length;++i){
+        printKLevelsDown(paths[i],k-i,i>0?paths[i-1]:null);
+    }
 }
 
 let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null, null]);
@@ -303,5 +361,8 @@ let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, 
 // levelorder(root);
 
 // iterativePrePostInTraversal(root);
-console.log(find(62));
-console.log(nodeToRootPath(root,62));
+// console.log(find(62));
+// console.log(nodeToRootPath(root,62));
+
+// printKLevelsDown(root,3);
+printKNodesFar(root,37,2)

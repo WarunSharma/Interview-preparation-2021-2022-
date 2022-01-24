@@ -79,57 +79,20 @@ public class Main {
     display(node.right);
   }
 
-  public static boolean find(Node node, int data){
-    if(node==null)
-        return false;
-    
-    if(node.data==data){
-        return true;
-    }    
-    
-    boolean lFind=find(node.left,data);
-    if(lFind==true){
-        return lFind;
+  public static Node removeLeaves(Node node){
+    if(node.left==null && node.right==null){
+        return null;
     }
-    
-    boolean rFind=find(node.right,data);
-    if(rFind==true){
-        return rFind;
-    }
-        
-    return false;    
-  }
 
-  public static ArrayList<Integer> nodeToRootPath(Node node, int data){
-    
-    ArrayList<Integer> leftRes=new ArrayList<>();
-    ArrayList<Integer> rightRes=new ArrayList<>();
-    
-    if(node==null){
-        return new ArrayList<Integer>();
+    if(node.left!=null){
+        node.left=removeLeaves(node.left);
     }
-    
-    //System.out.println(node.data);
-    
-    if(node.data==data){
-        ArrayList<Integer> res=new ArrayList<>();
-        res.add(node.data);
-        return res;
+
+    if(node.right!=null){
+        node.right=removeLeaves(node.right);
     }
-    
-        leftRes=nodeToRootPath(node.left,data);
-        if(leftRes.size()>0){
-            leftRes.add(node.data);
-            return leftRes;
-        }
-    
-        rightRes=nodeToRootPath(node.right,data);
-        if(rightRes.size()>0){
-            rightRes.add(node.data);
-            return rightRes;
-        }
-      
-    return new ArrayList<Integer>();
+
+    return node;
   }
 
   public static void main(String[] args) throws Exception {
@@ -145,14 +108,9 @@ public class Main {
       }
     }
 
-    int data = Integer.parseInt(br.readLine());
-
     Node root = construct(arr);
-    boolean found = find(root, data);
-    System.out.println(found);
-
-    ArrayList<Integer> path = nodeToRootPath(root, data);
-    System.out.println(path);
+    root = removeLeaves(root);
+    display(root);
   }
 
 }

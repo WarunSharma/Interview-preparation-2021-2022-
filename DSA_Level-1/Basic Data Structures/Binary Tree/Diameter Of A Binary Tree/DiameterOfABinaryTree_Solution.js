@@ -261,7 +261,7 @@ function nodeToRootPath(node,data){
     let result=[];
     if(node.data==data){
         let baseResult=[];
-        baseResult.push(node.data);
+        baseResult.push(node);
         return baseResult;
     }
         
@@ -273,16 +273,165 @@ function nodeToRootPath(node,data){
         rightRoute=nodeToRootPath(node.right,data);
 
     if(leftRoute.length>0){
-        leftRoute.push(node.data);
+        leftRoute.push(node);
         return leftRoute;
     }
 
     if(rightRoute.length>0){
-        rightRoute.push(node.data);
+        rightRoute.push(node);
         return rightRoute;
     }
 
     return [];
+}
+
+class PairLevel{
+    constructor(node,level){
+        this.node=node;
+        this.level=level;
+    }
+}
+
+function printKLevelsDown(node,k,blocker){
+
+    //Solution 1
+    // let level=0;
+    // let rootPair=new PairLevel(node,level);
+    // let queue=new Queue;
+    // queue.addLast(rootPair);
+
+    // while(queue.size()>0){
+    //     let queueSize=queue.size();
+    //     while(queueSize-->0){
+    //         let topPair=queue.removeFirst();
+
+    //         if(topPair.level==k){
+    //             console.log(topPair.node.data);
+    //         }
+
+    //         if(topPair.node.left){
+    //             let leftPair=new PairLevel(topPair.node.left,level+1);
+    //             queue.addLast(leftPair);
+    //         }
+
+    //         if(topPair.node.right){
+    //             let rightPair=new PairLevel(topPair.node.right,level+1);
+    //             queue.addLast(rightPair);
+    //         }
+    //     }
+    //     level++;
+    // }
+
+    //Solution 2
+    if(node==null || k<0 || node==blocker){
+        return;
+    }
+
+    if(k==0){
+        console.log(node.data)
+    }
+
+    printKLevelsDown(node.left,k-1,blocker);
+    printKLevelsDown(node.right,k-1,blocker);
+}
+
+function printKNodesFar(node,data,k){
+    let paths=nodeToRootPath(node,data);
+    console.log(paths);
+    for(let i=0;i<paths.length;++i){
+        printKLevelsDown(paths[i],k-i,i>0?paths[i-1]:null);
+    }
+}
+
+function createLeftCloneTree(node){
+
+    if(node==null){
+        return null;
+    }
+    let leftClone=createLeftCloneTree(node.left);
+    let rightClone=createLeftCloneTree(node.right);
+
+    let newNode=new Node(node.data);
+    newNode.left=leftClone;
+    node.left=newNode;
+
+    return node;
+}
+
+function transBackFromLeftClonedTree(node){
+
+    if(node==null)
+        return null;
+
+    let leftClone=transBackFromLeftClonedTree(node.left.left);
+    let rightClone=transBackFromLeftClonedTree(node.right);
+
+    node.left=leftClone;
+
+    return node; 
+}
+
+let dia=0;
+
+function diameter1(node){
+
+    if(node==null){
+        return -1;
+    }
+
+    let lt=diameter1(node.left);
+    let rt=diameter1(node.right);
+
+    let ht=Math.max(lt,rt)+1;
+
+    if(lt+rt+2>dia){
+        dia=lt+rt+2;
+    }
+
+    return ht;
+}
+
+function diameter2(node){
+    if(node==null){
+        return 0;
+    }
+
+    let lh=height(node.left);
+    let rh=height(node.right);
+
+    let Dia=lh+rh+2;
+
+    let lDia=diameter2(node.left);
+    let rDia=diameter2(node.right);
+
+    return Math.max(Dia,Math.max(lDia,rDia));
+
+}
+
+class DiameterPair{
+    constructor(height,diameter){
+        this.height=height;
+        this.diameter=diameter;
+    }
+}
+
+function diameter3(node){
+
+    if(node==null){
+        let basePair=new DiameterPair();
+        basePair.height=-1;
+        basePair.diameter=0;
+        return basePair;
+    }
+
+    let leftPair=diameter3(node.left);
+    let rightPair=diameter3(node.right);
+
+    let diameterPair=new DiameterPair();
+    diameterPair.height=Math.max(leftPair.height,rightPair.height)+1;
+    diameterPair.diameter=Math.max(leftPair.height+rightPair.height+2,Math.max(leftPair.diameter,rightPair.diameter));
+
+    return diameterPair;
 }
 
 let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null, null]);
@@ -303,5 +452,20 @@ let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, 
 // levelorder(root);
 
 // iterativePrePostInTraversal(root);
-console.log(find(62));
-console.log(nodeToRootPath(root,62));
+// console.log(find(62));
+// console.log(nodeToRootPath(root,62));
+
+// printKLevelsDown(root,3);
+// printKNodesFar(root,37,2)
+// createLeftCloneTree(root);
+// preorder(root);
+// console.log('------------------');
+// transBackFromLeftClonedTree(root);
+// preorder(root);
+
+// diameter1(root);
+//console.log(dia);
+
+//console.log(diameter2(root));
+    
+console.log(diameter3(root));

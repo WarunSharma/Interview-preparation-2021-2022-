@@ -79,57 +79,36 @@ public class Main {
     display(node.right);
   }
 
-  public static boolean find(Node node, int data){
-    if(node==null)
-        return false;
-    
-    if(node.data==data){
-        return true;
-    }    
-    
-    boolean lFind=find(node.left,data);
-    if(lFind==true){
-        return lFind;
+  public static int height(Node node) {
+    if (node == null) {
+      return -1;
     }
-    
-    boolean rFind=find(node.right,data);
-    if(rFind==true){
-        return rFind;
-    }
-        
-    return false;    
+
+    int lh = height(node.left);
+    int rh = height(node.right);
+
+    int th = Math.max(lh, rh) + 1;
+    return th;
   }
 
-  public static ArrayList<Integer> nodeToRootPath(Node node, int data){
-    
-    ArrayList<Integer> leftRes=new ArrayList<>();
-    ArrayList<Integer> rightRes=new ArrayList<>();
-    
+  static int tilt = 0;
+  static class sumDifferPair{
+          int sum=0;
+          int differ=0;
+  }
+  public static sumDifferPair tilt(Node node){
     if(node==null){
-        return new ArrayList<Integer>();
+        return new sumDifferPair();
     }
-    
-    //System.out.println(node.data);
-    
-    if(node.data==data){
-        ArrayList<Integer> res=new ArrayList<>();
-        res.add(node.data);
-        return res;
-    }
-    
-        leftRes=nodeToRootPath(node.left,data);
-        if(leftRes.size()>0){
-            leftRes.add(node.data);
-            return leftRes;
-        }
-    
-        rightRes=nodeToRootPath(node.right,data);
-        if(rightRes.size()>0){
-            rightRes.add(node.data);
-            return rightRes;
-        }
-      
-    return new ArrayList<Integer>();
+
+    sumDifferPair leftPair=tilt(node.left);
+    sumDifferPair rightPair=tilt(node.right);
+
+    sumDifferPair resPair=new sumDifferPair();
+    resPair.sum=leftPair.sum+rightPair.sum+node.data;
+    resPair.differ=Math.abs(leftPair.sum-rightPair.sum);
+    tilt+=resPair.differ;
+    return resPair;
   }
 
   public static void main(String[] args) throws Exception {
@@ -145,14 +124,10 @@ public class Main {
       }
     }
 
-    int data = Integer.parseInt(br.readLine());
-
     Node root = construct(arr);
-    boolean found = find(root, data);
-    System.out.println(found);
 
-    ArrayList<Integer> path = nodeToRootPath(root, data);
-    System.out.println(path);
+    tilt(root);
+    System.out.println(tilt);
   }
 
 }

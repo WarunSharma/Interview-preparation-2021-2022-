@@ -78,60 +78,54 @@ public class Main {
     display(node.left);
     display(node.right);
   }
+  
+  public static class bstpair {
+  boolean isBST;
 
-  public static boolean find(Node node, int data){
-    if(node==null)
-        return false;
-    
-    if(node.data==data){
-        return true;
-    }    
-    
-    boolean lFind=find(node.left,data);
-    if(lFind==true){
-        return lFind;
-    }
-    
-    boolean rFind=find(node.right,data);
-    if(rFind==true){
-        return rFind;
-    }
-        
-    return false;    
+  int min;
+  int max;
+  Node root;     //1
+  int size;
+
+}
+
+//****************IS BST*****************
+
+public static bstpair isBST(Node node) {
+
+  if (node == null) {
+    bstpair bp = new bstpair();
+    bp.isBST = true;
+    bp.min = Integer.MAX_VALUE;
+    bp.max = Integer.MIN_VALUE;
+    bp.root = null;
+    bp.size = 0;
+    return bp;
   }
 
-  public static ArrayList<Integer> nodeToRootPath(Node node, int data){
-    
-    ArrayList<Integer> leftRes=new ArrayList<>();
-    ArrayList<Integer> rightRes=new ArrayList<>();
-    
-    if(node==null){
-        return new ArrayList<Integer>();
-    }
-    
-    //System.out.println(node.data);
-    
-    if(node.data==data){
-        ArrayList<Integer> res=new ArrayList<>();
-        res.add(node.data);
-        return res;
-    }
-    
-        leftRes=nodeToRootPath(node.left,data);
-        if(leftRes.size()>0){
-            leftRes.add(node.data);
-            return leftRes;
-        }
-    
-        rightRes=nodeToRootPath(node.right,data);
-        if(rightRes.size()>0){
-            rightRes.add(node.data);
-            return rightRes;
-        }
-      
-    return new ArrayList<Integer>();
+  bstpair lp = isBST(node.left);
+  bstpair rp = isBST(node.right);
+
+  bstpair mp = new bstpair();
+
+  mp.isBST = lp.isBST && rp.isBST && (node.data >= lp.max && node.data <= rp.min);
+  mp.min = Math.min(node.data, Math.min(lp.min, rp.min));
+  mp.max = Math.max(node.data, Math.max(lp.max, rp.max));
+
+  if (mp.isBST) {         //2
+    mp.root = node;
+    mp.size = lp.size + rp.size + 1;
+  } else if (lp.size > rp.size) {  //3
+    mp.root = lp.root;
+    mp.size = lp.size;
+  } else {  //4
+    mp.root = rp.root;
+    mp.size = rp.size;
   }
 
+  return mp;
+}
+  
   public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int n = Integer.parseInt(br.readLine());
@@ -145,14 +139,13 @@ public class Main {
       }
     }
 
-    int data = Integer.parseInt(br.readLine());
-
     Node root = construct(arr);
-    boolean found = find(root, data);
-    System.out.println(found);
-
-    ArrayList<Integer> path = nodeToRootPath(root, data);
-    System.out.println(path);
+    
+    // write your code here
+    bstpair pair=isBST(root);
+    System.out.print(pair.root.data);
+    System.out.print('@');
+    System.out.print(pair.size);
   }
 
 }

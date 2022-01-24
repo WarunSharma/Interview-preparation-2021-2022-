@@ -261,7 +261,7 @@ function nodeToRootPath(node,data){
     let result=[];
     if(node.data==data){
         let baseResult=[];
-        baseResult.push(node.data);
+        baseResult.push(node);
         return baseResult;
     }
         
@@ -273,20 +273,208 @@ function nodeToRootPath(node,data){
         rightRoute=nodeToRootPath(node.right,data);
 
     if(leftRoute.length>0){
-        leftRoute.push(node.data);
+        leftRoute.push(node);
         return leftRoute;
     }
 
     if(rightRoute.length>0){
-        rightRoute.push(node.data);
+        rightRoute.push(node);
         return rightRoute;
     }
 
     return [];
 }
 
-let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null, null]);
+class PairLevel{
+    constructor(node,level){
+        this.node=node;
+        this.level=level;
+    }
+}
 
+function printKLevelsDown(node,k,blocker){
+
+    //Solution 1
+    // let level=0;
+    // let rootPair=new PairLevel(node,level);
+    // let queue=new Queue;
+    // queue.addLast(rootPair);
+
+    // while(queue.size()>0){
+    //     let queueSize=queue.size();
+    //     while(queueSize-->0){
+    //         let topPair=queue.removeFirst();
+
+    //         if(topPair.level==k){
+    //             console.log(topPair.node.data);
+    //         }
+
+    //         if(topPair.node.left){
+    //             let leftPair=new PairLevel(topPair.node.left,level+1);
+    //             queue.addLast(leftPair);
+    //         }
+
+    //         if(topPair.node.right){
+    //             let rightPair=new PairLevel(topPair.node.right,level+1);
+    //             queue.addLast(rightPair);
+    //         }
+    //     }
+    //     level++;
+    // }
+
+    //Solution 2
+    if(node==null || k<0 || node==blocker){
+        return;
+    }
+
+    if(k==0){
+        console.log(node.data)
+    }
+
+    printKLevelsDown(node.left,k-1,blocker);
+    printKLevelsDown(node.right,k-1,blocker);
+}
+
+function printKNodesFar(node,data,k){
+    let paths=nodeToRootPath(node,data);
+    console.log(paths);
+    for(let i=0;i<paths.length;++i){
+        printKLevelsDown(paths[i],k-i,i>0?paths[i-1]:null);
+    }
+}
+
+function createLeftCloneTree(node){
+
+    if(node==null){
+        return null;
+    }
+    let leftClone=createLeftCloneTree(node.left);
+    let rightClone=createLeftCloneTree(node.right);
+
+    let newNode=new Node(node.data);
+    newNode.left=leftClone;
+    node.left=newNode;
+
+    return node;
+}
+
+function transBackFromLeftClonedTree(node){
+
+    if(node==null)
+        return null;
+
+    let leftClone=transBackFromLeftClonedTree(node.left.left);
+    let rightClone=transBackFromLeftClonedTree(node.right);
+
+    node.left=leftClone;
+
+    return node; 
+}
+
+function removeLeaves(node){
+    
+    if(node.left==null && node.right==null){
+        return null;
+    }
+
+    if(node.left){
+        node.left=removeLeaves(node.left);
+    }
+
+    if(node.right){
+        node.right=removeLeaves(node.right);
+    }
+
+    return node;
+}
+
+function printSingleChildNodes(node,parent){
+
+    if(node==null){
+        return;
+    }
+
+    if(parent!=null && (parent.left==node && parent.right==null)){
+        console.log(node.data);
+    }
+    else if(parent!=null && (parent.left==null && parent.right==node)){
+        console.log(node.data);
+    }
+    printSingleChildNodes(node.left,node);
+    printSingleChildNodes(node.right,node);
+}
+
+let globalIsBalance=true;
+
+function isBalancedTree1(node){
+
+    if(node==null)
+        return -1;
+
+    let lHeight=isBalancedTree1(node.left);
+    let rHeight=isBalancedTree1(node.right);
+
+    let isBalance=Math.abs(lHeight-rHeight)<=1;
+
+    if(isBalance==false){
+        globalIsBalance=isBalance;
+    }
+    
+
+    return Math.max(lHeight,rHeight)+1;
+}
+
+class IsBalancePair{
+    constructor(height,isBalance){
+        this.height=height;
+        this.isBalance=isBalance;
+    }
+}
+
+function isBalancedTree2(node){
+
+    if(node==null){
+        return new IsBalancePair(-1,true);
+    }
+
+    let leftBalancedPair=isBalancedTree2(node.left);
+    let rightBalancedPair=isBalancedTree2(node.right);
+
+    let resBalancedPair=new IsBalancePair();
+    resBalancedPair.height=Math.max(leftBalancedPair.height,rightBalancedPair.height)+1;
+    resBalancedPair.isBalance=Math.abs(leftBalancedPair.height-rightBalancedPair.height)<=1 &&
+                                leftBalancedPair.isBalance && rightBalancedPair.isBalance;
+    
+    return resBalancedPair;                            
+}
+
+class BST{
+    constructor(min,max,isBST){
+        this.min=min;
+        this.max=max;
+        this.isBST=isBST;
+    }
+}
+
+function isBinarySearchTree(node){
+
+    if(node==null){
+        return new BST(Number.MAX_SAFE_INTEGER,Number.MIN_SAFE_INTEGER,true);
+    }
+
+    let leftBST=isBinarySearchTree(node.left);
+    let rightBST=isBinarySearchTree(node.right);
+
+    let res=new BST();
+    res.min=Math.min(node.data,Math.min(leftBST.min,rightBST.min));
+    res.max=Math.max(node.data,Math.max(leftBST.max,rightBST.max));
+    res.isBST=node.data>leftBST.max && node.data<rightBST.min && leftBST.isBST && rightBST.isBST;
+
+    return res;
+}
+
+let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null, null]);
+root= construct([50, 25, 12, null, null, 37, 30, null, null, 51, null, null, 75, 62, 60, null, null, 70, null, null, null])
 // display(root);
 
 // console.log(size(root));
@@ -303,5 +491,26 @@ let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, 
 // levelorder(root);
 
 // iterativePrePostInTraversal(root);
-console.log(find(62));
-console.log(nodeToRootPath(root,62));
+// console.log(find(62));
+// console.log(nodeToRootPath(root,62));
+
+// printKLevelsDown(root,3);
+// printKNodesFar(root,37,2)
+// createLeftCloneTree(root);
+// preorder(root);
+// console.log('------------------');
+// transBackFromLeftClonedTree(root);
+// preorder(root);
+
+// removeLeaves(root);
+// console.log("---------------");
+// preorder(root);
+
+//printSingleChildNodes(root,null);
+
+// isBalancedTree1(root);
+// console.log(globalIsBalance);
+
+// console.log(isBalancedTree2(root).isBalance);
+
+console.log(isBinarySearchTree(root).isBST);

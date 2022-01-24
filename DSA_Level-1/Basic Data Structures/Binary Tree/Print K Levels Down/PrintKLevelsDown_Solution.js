@@ -285,6 +285,56 @@ function nodeToRootPath(node,data){
     return [];
 }
 
+class PairLevel{
+    constructor(node,level){
+        this.node=node;
+        this.level=level;
+    }
+}
+
+function printKLevelsDown(node,k){
+
+    //Solution 1
+    // let level=0;
+    // let rootPair=new PairLevel(node,level);
+    // let queue=new Queue;
+    // queue.addLast(rootPair);
+
+    // while(queue.size()>0){
+    //     let queueSize=queue.size();
+    //     while(queueSize-->0){
+    //         let topPair=queue.removeFirst();
+
+    //         if(topPair.level==k){
+    //             console.log(topPair.node.data);
+    //         }
+
+    //         if(topPair.node.left){
+    //             let leftPair=new PairLevel(topPair.node.left,level+1);
+    //             queue.addLast(leftPair);
+    //         }
+
+    //         if(topPair.node.right){
+    //             let rightPair=new PairLevel(topPair.node.right,level+1);
+    //             queue.addLast(rightPair);
+    //         }
+    //     }
+    //     level++;
+    // }
+
+    //Solution 2
+    if(node==null || k<0){
+        return;
+    }
+
+    if(k==0){
+        console.log(node.data)
+    }
+
+    printKLevelsDown(node.left,k-1);
+    printKLevelsDown(node.right,k-1);
+}
+
 let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null, null]);
 
 // display(root);
@@ -303,5 +353,7 @@ let root = construct([50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, 
 // levelorder(root);
 
 // iterativePrePostInTraversal(root);
-console.log(find(62));
-console.log(nodeToRootPath(root,62));
+// console.log(find(62));
+// console.log(nodeToRootPath(root,62));
+
+printKLevelsDown(root,3);

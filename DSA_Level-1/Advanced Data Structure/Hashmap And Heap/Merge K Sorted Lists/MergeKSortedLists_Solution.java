@@ -2,7 +2,7 @@ import java.io.*;
 
 import java.util.*;
 
-public class Main {
+public class MergeKSortedLists_Solution {
 
   public static class Pair implements Comparable< Pair> {
     int li;

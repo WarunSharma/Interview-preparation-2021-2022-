@@ -25,26 +25,48 @@ public static void main(String[] args) throws Exception {
  }
 
  public static int[] solve(int[] arr){
-   int[] nge=new int[arr.length];
    Stack<Integer> st=new Stack<>();
-   
-   nge[arr.length-1]=-1;
-   st.push(arr[arr.length-1]);
-   
-   for(int i=arr.length-2;i>=0;--i){
-       while(st.size()>0 && arr[i]>st.peek()){
-           st.pop();
-       }
-       if(st.size()==0){
-           nge[i]=-1;
-       }
-       else{
-           nge[i]=st.peek();
-       }
-       st.push(arr[i]);
-   }
-   
-   return nge;
+   int[] res=new int[arr.length];
+
+   //Traverse from end
+  //  st.push(arr[arr.length-1]);
+  //  res[arr.length-1]=-1;
+
+  //  for(int i=arr.length-2;i>=0;--i){
+  //    while(st.size()>0 && arr[i]>st.peek()){
+  //      st.pop();
+  //    }
+
+  //    if(st.size()==0){
+  //      res[i]=-1;
+  //    }
+  //    else{
+  //      res[i]=st.peek();
+  //    }
+
+  //     st.push(arr[i]);
+  //  }
+  //  return res;
+
+
+  // Traverse from start
+
+  st.push(0);
+
+  for(int i=1;i<arr.length;++i){
+    while(st.size()>0 && arr[i]>arr[st.peek()]){
+      res[st.peek()]=arr[i];
+      st.pop();
+    }
+    st.push(i);
+  }
+
+  while(st.size()>0){
+    res[st.peek()]=-1;
+      st.pop();
+  }
+
+  return res;
  }
 
 }

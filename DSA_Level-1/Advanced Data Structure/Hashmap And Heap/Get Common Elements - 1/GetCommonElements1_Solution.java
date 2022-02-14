@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main{
+public class GetCommonElements1_Solution{
 
 public static void main(String[] args) throws Exception {
     Scanner scn=new Scanner(System.in);
@@ -9,17 +9,17 @@ public static void main(String[] args) throws Exception {
     //System.out.pritln(n1);
     int[] arr1=new int[n1];
     for(int i=0;i<n1;++i){
-        arr1[i]=scn.nextLine();
+        arr1[i]=scn.nextInt();
     }
 
     // for(int i=0;i<n1;++i){
     //     System.out.pritln(arr[i]);
     // }
 
-    int n2=scn.nextLine();
+    int n2=scn.nextInt();
     int[] arr2=new int[n2];
     for(int i=0;i<n2;++i){
-        arr2[i]=scn.nextLine();
+        arr2[i]=scn.nextInt();
     }
 
     HashMap<Integer,Integer> map=new HashMap<>();

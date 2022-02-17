@@ -33,66 +33,61 @@ function precedence(ch){
     }
 }
 
-function processInfix(operandStack,operatorStack){
+function processInfix(operatorStack,prefixStack,postfixStack){
+    // console.log(operatorStack);
+    // console.log(prefixStack);
+    // console.log(postfixStack);
+    // console.log();
     let op=operatorStack.pop();
-    let v2=operandStack.pop();
-    let v1=operandStack.pop();
-    console.log(`${v1}${op}${v2}`);
-    if(op=="+"){
-        return v1+v2;
-    }
-    else if(op=="-"){
-        return v1-v2;
-    }
-    else if(op=="*"){
-        return v1*v2;
-    }
-    else{
-        return v1/v2;
-    }
+    let v2=prefixStack.pop();
+    let v1=prefixStack.pop();
+    
+    prefixStack.push(""+op+v1+v2);
+    v2=postfixStack.pop();
+    v1=postfixStack.pop();
+    postfixStack.push(""+v1+v2+op);
 
 }
 
 function infixConversion(str){
-    let operandStack=new Stack();
     let operatorStack=new Stack();
+    let prefixStack=new Stack();
+    let postfixStack=new Stack();
     let sum=0;
     for(let i=0;i<str.length;++i){
-        if(str[i]=="("){
-            operatorStack.push(str[i]);
+        let ch=str[i];
+        if(ch=="("){
+            operatorStack.push(ch);
         }
-        else if(str[i]=="0" || str[i]=="1" || str[i]=="2" || str[i]=="3" || str[i]=="4" || str[i]=="5" 
-        || str[i]=="6" || str[i]=="7" || str[i]=="8" || str[i]=="9"){
-            operandStack.push(Number.parseInt(str[i]));
+        else if((ch>='0' && ch<='9') || (ch>='a' && ch<='z') || (ch>='A' && ch<='Z')){
+            prefixStack.push(ch);
+            postfixStack.push(ch);
         }
-        else if(str[i]==")"){
+        else if(ch==")"){
             while(operatorStack.size()>0 && operatorStack.peek()!="("){
-                let ans=processInfix(operandStack,operatorStack);
-                //console.log(ans);
-                operandStack.push(ans);
+                processInfix(operatorStack,prefixStack,postfixStack);
             }
             operatorStack.pop();
         }
-        else if(str[i]=="+" || str[i]=="-" || str[i]=="*" || str[i]=="/"){
-            while(operatorStack.size()>0 && operatorStack.peek()!="(" && precedence(str[i])<=precedence(operatorStack.peek())){
-                let ans=processInfix(operandStack,operatorStack);
-                //console.log(ans);
-                operandStack.push(ans);
+        else if(ch=="+" || ch=="-" || ch=="*" || ch=="/"){
+            while(operatorStack.size()>0 && operatorStack.peek()!="(" && precedence(ch)<=precedence(operatorStack.peek())){
+                processInfix(operatorStack,prefixStack,postfixStack);
             }
-            operatorStack.push(str[i]);
+            operatorStack.push(ch);
         }
         else{
 
         }
     }
     
-    while(operandStack.size()>1){
-        let ans=processInfix(operandStack,operatorStack);
-        operandStack.push(ans);
+    while(operatorStack.size()>0){
+        processInfix(operatorStack,prefixStack,postfixStack);
     }
 
-    console.log(operandStack.peek());
+    console.log(postfixStack.peek());
+    console.log(prefixStack.peek());
 }
 
 infixConversion("1+2*3/3");
-infixConversion("(6-(2+1)/3)*4");
+console.log();
+infixConversion("a*(b-c+d)/e");

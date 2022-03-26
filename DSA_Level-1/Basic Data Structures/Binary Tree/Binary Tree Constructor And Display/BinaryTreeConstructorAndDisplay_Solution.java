@@ -1,7 +1,7 @@
 import java.util.*;
 
 
-public class Main {
+public class BinaryTreeConstructorAndDisplay_Solution {
 
   public static class Node {
     int data;
@@ -90,7 +90,7 @@ public class Main {
   }
 
   public static void main(String[]args) {
-    Integer[]arr = {50, 25, 12, null, null, 37, 30, null, null, null,                                       75, 62, null, 70, null, null, 87, null, null};
+    Integer[]arr = {50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null, null};
     Node root = construct(arr);
     display(root);
   }

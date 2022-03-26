@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class DiameterOfABinaryTree_Solution {
   public static class Node {
     int data;
     Node left;

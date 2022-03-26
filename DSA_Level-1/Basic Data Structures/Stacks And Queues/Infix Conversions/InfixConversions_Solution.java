@@ -71,7 +71,7 @@ public static void main(String[] args) throws Exception {
         }
     }
     
-    while(operandStack.size()>1){
+    while(operandStack.size()>0){
         int ans=processInfix(operandStack,operatorStack);
         operandStack.push(ans);
     }

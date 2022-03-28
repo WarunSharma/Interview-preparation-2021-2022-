@@ -11,15 +11,14 @@ function longestSubstring(str){
 
         while(i<str.length){
             let ch=str[i++];
-            let len=i-j;
-
-            maxLength=len>maxLength?len:maxLength;
             if(map.has(ch)){
                 map.set(ch,map.get(ch)+1);
                 break;
             }
             else{
                 map.set(ch,1);
+                let len=i-j;
+                maxLength=len>maxLength?len:maxLength;
             }
         }
 
